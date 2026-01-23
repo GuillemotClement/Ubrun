@@ -1,0 +1,40 @@
+name: CI Pipeline
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  front-test:
+    runs-on: ubuntu-24.04
+
+    defaults:
+      run:
+        working-directory: ./front
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@3d267786b128fe76c2f16a390aa2448b815359f3
+
+      - name: install deps
+        run: bun install
+
+      - name: Security Audit
+        run: bun audit
+
+      - name: lint & format
+        run: bun run biome
+
+      # - name: tests automatic
+      #   run: bun run test
+
+      - name: build project
+        run: bun run build
