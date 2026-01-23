@@ -30,8 +30,8 @@ jobs:
       - name: Security Audit
         run: bun audit
 
-      # - name: lint & format
-      #   run: bun run biome
+      - name: lint & format
+        run: bun run biome
 
       # - name: tests automatic
       #   run: bun run test

@@ -1,4 +1,4 @@
 export type ConvertSpeedToAllure = {
-  minutes: number;
-  secondes: number;
+	minutes: number;
+	secondes: number;
 };

@@ -1,7 +1,3 @@
-type PredictorPageProps = {};
-
-export default function PredictorPage({}: PredictorPageProps) {
-  return (
-    <div>PredictorPage</div>
-  );
+export default function PredictorPage() {
+	return <div>PredictorPage</div>;
 }
