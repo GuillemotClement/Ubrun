@@ -1,17 +1,22 @@
 import { Link } from "@tanstack/react-router";
+import logo from "../../assets/logo.svg";
 
 export default function Header() {
 	return (
-		<header className="flex items-center justify-between shadow py-4 px-10">
-			<Link to="/" className="">
-				<p>UbRun</p>
+		<header className="navbar bg-base-100 shadow-sm">
+			<Link to={"/"} className="navbar-start">
+				<img src={logo} alt="logo" className="w-12 auto" />
 			</Link>
-
-			<ul>
-				<li>
-					<Link to="/tools">Outils</Link>
-				</li>
-			</ul>
+			<div className="navbar-center hidden lg:flex">
+				<ul className="menu menu-horizontal px-1">
+					<li>
+						<Link to="/">Accueil</Link>
+					</li>
+					<li>
+						<Link to="/tools">Outils</Link>
+					</li>
+				</ul>
+			</div>
 		</header>
 	);
 }
