@@ -7,7 +7,7 @@ export default function Header() {
 			<Link to={"/"} className="navbar-start">
 				<img src={logo} alt="logo" className="w-12 auto" />
 			</Link>
-			<div className="navbar-center hidden lg:flex">
+			<div className="navbar-center">
 				<ul className="menu menu-horizontal px-1">
 					<li>
 						<Link to="/">Accueil</Link>
