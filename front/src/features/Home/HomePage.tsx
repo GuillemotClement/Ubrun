@@ -1,6 +1,6 @@
-import { Apple, Bot } from "lucide-react";
+// import { Apple, Bot } from "lucide-react";
 import imageHero from "../../assets/hero.png";
-import HomepageCard from "./HomepageCard";
+// import HomepageCard from "./HomepageCard";
 
 export default function Homepage() {
 	return (
