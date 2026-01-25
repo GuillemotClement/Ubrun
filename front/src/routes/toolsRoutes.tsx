@@ -9,46 +9,46 @@ import { rootRoute } from "./root";
 
 // définition du parent de la section. On l'exporte car c'est lui qu'on rattache au routeur principal
 export const baseToolsRouter = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/tools",
-  component: () => <ToolsPage />,
+	getParentRoute: () => rootRoute,
+	path: "/tools",
+	component: () => <ToolsPage />,
 });
 
 // // définition des enfants. Leur layout se base sur la parent.
 const fcmPage = createRoute({
-  getParentRoute: () => baseToolsRouter,
-  path: "/fcm",
-  component: () => <FcmPage />,
+	getParentRoute: () => baseToolsRouter,
+	path: "/fcm",
+	component: () => <FcmPage />,
 });
 
 const vmaPage = createRoute({
-  getParentRoute: () => baseToolsRouter,
-  path: "/vma",
-  component: () => <VmaPage />,
+	getParentRoute: () => baseToolsRouter,
+	path: "/vma",
+	component: () => <VmaPage />,
 });
 
 const purcentPage = createRoute({
-  getParentRoute: () => baseToolsRouter,
-  path: "/purcent",
-  component: () => <PurcentPage />,
+	getParentRoute: () => baseToolsRouter,
+	path: "/purcent",
+	component: () => <PurcentPage />,
 });
 
 const convertorPage = createRoute({
-  getParentRoute: () => baseToolsRouter,
-  path: "/convertor",
-  component: () => <ConvertorPage />,
+	getParentRoute: () => baseToolsRouter,
+	path: "/convertor",
+	component: () => <ConvertorPage />,
 });
 
 const predictorToolRoute = createRoute({
-  getParentRoute: () => baseToolsRouter,
-  path: "/predictor",
-  component: () => <PredictorPage />,
+	getParentRoute: () => baseToolsRouter,
+	path: "/predictor",
+	component: () => <PredictorPage />,
 });
 
 export const ToolsRouter = baseToolsRouter.addChildren([
-  fcmPage,
-  vmaPage,
-  purcentPage,
-  convertorPage,
-  predictorToolRoute,
+	fcmPage,
+	vmaPage,
+	purcentPage,
+	convertorPage,
+	predictorToolRoute,
 ]);
