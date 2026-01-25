@@ -5,6 +5,7 @@ import {
 	HeartPulse,
 	PanelLeftOpen,
 	Percent,
+	Timer,
 } from "lucide-react";
 
 export default function ToolsPage() {
@@ -99,17 +100,16 @@ export default function ToolsPage() {
 						</li>
 
 						{/* Prédicteur */}
-						{/*<li>*/}
-						{/*  <Link*/}
-						{/*    to="/tools/predictor"*/}
-						{/*    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"*/}
-						{/*    data-tip="Prédicteur"*/}
-						{/*  >*/}
-						{/*    <Timer />*/}
-
-						{/*    <span className="is-drawer-close:hidden">Prédicteur</span>*/}
-						{/*  </Link>*/}
-						{/*</li>*/}
+						<li>
+							<Link
+								to="/tools/predictor"
+								className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+								data-tip="Prédicteur"
+							>
+								<Timer />
+								<span className="is-drawer-close:hidden">Prédicteur</span>
+							</Link>
+						</li>
 					</ul>
 				</div>
 			</div>
