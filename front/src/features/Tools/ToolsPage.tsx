@@ -3,6 +3,7 @@ import {
 	CircleGauge,
 	GitCompareArrows,
 	HeartPulse,
+	House,
 	PanelLeftOpen,
 	Percent,
 	Timer,
@@ -42,6 +43,20 @@ export default function ToolsPage() {
 					{/* Sidebar content here */}
 
 					<ul className="menu w-full grow">
+						{/* Home */}
+						<li>
+							<Link
+								to="/tools"
+								className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+								data-tip="Accueil outils"
+							>
+								<House />
+								<span className="is-drawer-close:hidden">
+									Accueil outils
+								</span>
+							</Link>
+						</li>
+
 						{/* Calcul de pourcentage */}
 						<li>
 							<Link
