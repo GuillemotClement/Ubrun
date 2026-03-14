@@ -8,6 +8,7 @@ const UserSchema = z.object({
   name: z.string().min(3),
   email: z.email(),
   password: z.string().min(8),
+  image: z.string().optional(),
 });
 
 const userRouter = Router();
@@ -49,6 +50,7 @@ userRouter.post("/", async (request: Request, response: Response) => {
     name: result.data.name,
     email: result.data.email,
     password: hashedPassword,
+    image: result.data.image,
   };
 
   try {
