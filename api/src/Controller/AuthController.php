@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +24,7 @@ final class AuthController extends AbstractController
     ]);
   }
 
-  #[Route('/api/auth/register', name: 'register', methods: ['POST'])]
+  #[Route('/auth/register', name: 'api_register', methods: ['POST'])]
   public function register(
     Request $request,
     ValidatorInterface $validator,
@@ -44,6 +45,7 @@ final class AuthController extends AbstractController
     $user = new User();
     $user->setEmail($data['email'] ?? '');
     $user->setPassword($data['password'] ?? '');
+    $user->setRoles(['ROLE_USER']);
 
 
     // validation des données
@@ -76,4 +78,38 @@ final class AuthController extends AbstractController
       'message' => 'User registered',
     ], Response::HTTP_CREATED);
   }
+
+  // #[Route('/auth/login', name: 'api_login', methods: ['POST'])]
+  // public function login(
+  //   Request $request,
+  //   UserRepository $userRepository,
+  //   UserPasswordHasherInterface $hasher,
+  // ): JsonResponse {
+  //   $data = json_decode($request->getContent(), true);
+
+  //   if (!$data) {
+  //     return $this->json([
+  //       'errors' => 'Invalid JSON',
+  //     ], Response::HTTP_BAD_REQUEST);
+  //   }
+
+  //   $userDB = $userRepository->findBy([
+  //     'email' => $data['email'],
+  //   ]);
+
+  //   if (!$userDB) {
+  //     return $this->json([
+  //       'errors' => 'Credential not valid',
+  //     ], Response::HTTP_UNAUTHORIZED);
+  //   }
+
+  //   $isValidPassword = $hasher->
+
+
+
+  // }
 }
+
+
+// curl -X POST https://localhost:8000/api/auth/login -H "Content-Type: application/json" -d '{"email":"user@mail.com", "password":"12345678"}'
+// curl -X POST https://localhost:8000/auth/register -H "Content-Type: application/json" -d '{"email":"user@mail.com", "password":"12345678"}'
