@@ -29,7 +29,7 @@ services:
   #        condition: service_healthy
 
   db:
-    image: postgres:18-alpine
+    image: postgres:17-alpine
     restart: unless-stopped
     shm_size: 128mb
     environment:
