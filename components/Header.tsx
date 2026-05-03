@@ -8,8 +8,9 @@ export default function Header() {
       <Link href="/">
         <Image src="/logo.svg" alt="logo ubrun" width={75} height={75} />
       </Link>
-      <div className="">
+      <div className="flex gap-x-2">
         <NavLink href="/">Accueil</NavLink>
+        <NavLink href="/tools/vma">VMA</NavLink>
       </div>
     </header>
   );
