@@ -95,7 +95,7 @@ RUN chown node:node .next
 # ADD FOR COOLIFY 
 USER root 
 
-RUN api-get update \ 
+RUN apt-get update \ 
   && apt-get install -y --no-install-recommends curl \ 
   && rm -rf /var/lib/apt/lists/*
 
