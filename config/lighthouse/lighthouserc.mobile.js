@@ -1,0 +1,46 @@
+// {
+//   "ci": {
+//     "collect": {
+//       "url": [
+//         "http://localhost:3000",
+//         "http://localhost:3000/tools/fcm",
+//         "http://localhost:3000/tools/vma"
+//       ],
+//       "startServerCommand": "npm run start",
+//       "startServerReadyPattern": "Ready|ready|started server|Local:",
+//       "numberOfRuns": 1
+//     },
+//     "assert": {
+//       "assertions": {
+//         "categories:performance": ["error", { "minScore": 0.9 }],
+//         "categories:accessibility": ["error", { "minScore": 0.9 }],
+//         "categories:best-practices": ["error", { "minScore": 0.9 }],
+//         "categories:seo": ["error", { "minScore": 0.9 }]
+//       }
+//     },
+//     "upload": {
+//       "target": "temporary-public-storage",
+//       "githubStatusContextSuffix": "mobile"
+//     }
+//   }
+// }
+import routes from './lighthouse.setting';
+import { assertions } from './lighthouse.setting';
+
+module.exports = {
+  ci: {
+    collect: {
+      url: routes,
+      startServerCommand: 'npm run start',
+      startServerReadyPattern: 'Ready|ready|started server|Local:',
+      numberOfRuns: 1,
+    },
+    assert: {
+      assertions,
+    },
+    upload: {
+      target: 'temporary-public-storage',
+      githubStatusContextSuffix: 'mobile',
+    },
+  },
+};
