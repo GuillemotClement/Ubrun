@@ -1,0 +1,63 @@
+services:
+  #  frontend:
+  #    build:
+  #      context: ./front
+  #      dockerfile: Dockerfile.dev
+  #    environment:
+  #      - VITE_BACKEND_URL=${VITE_BACKEND_URL:-http://localhost:3001}
+  #    ports:
+  #      # Publish frontend port to host for direct browser access
+  #      - "5173:5173"
+  #    volumes:
+  #      - ./front:/app
+  #      - /app/node_modules
+  #
+  #  backend:
+  #    build:
+  #      context: ./api
+  #      dockerfile: Dockerfile.dev
+  #    environment:
+  #      - PORT=${PORT:-3001}
+  #      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-ubom}
+  #    ports:
+  #      - "${PORT:-3001}:${PORT:-3001}"
+  #    volumes:
+  #      - "./api:/app"
+  #      - /app/node_modules
+  #    depends_on:
+  #      db:
+  #        condition: service_healthy
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-ubrun}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Initialize database with SQL script
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      # Check if Postgres is ready to accept connections
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ubrun"]
+      start_period: 15s
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
