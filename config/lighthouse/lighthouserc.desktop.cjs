@@ -1,5 +1,3 @@
-// import { assertions, routes } from './lighthouse.setting.cjs';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { assertions, routes } = require('./lighthouse.setting.cjs');
 
 const config = {
