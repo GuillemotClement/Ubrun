@@ -26,7 +26,7 @@
 // }
 import { assertions, routes } from './lighthouse.setting.mjs';
 
-module.exports = {
+const config = {
   ci: {
     collect: {
       url: routes,
@@ -43,3 +43,5 @@ module.exports = {
     },
   },
 };
+
+export default config;
