@@ -57,8 +57,8 @@ export default function VmaPage() {
   };
 
   return (
-    <div className="flex gap-x-2">
-      <Card className="flex-1 flex justify-center">
+    <div className="">
+      <Card className="">
         <CardHeader>
           <CardTitle className="text-center mb-2">
             Vitesse Maximale Aérobie
@@ -89,7 +89,7 @@ export default function VmaPage() {
         </CardContent>
       </Card>
 
-      <Card className="flex-2">
+      <Card className="">
         <CardHeader>
           <CardTitle className="text-center">Zone VMA</CardTitle>
         </CardHeader>

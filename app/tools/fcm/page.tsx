@@ -57,6 +57,7 @@ export default function FcmPage() {
 
   const onSubmitAge = (data: FormAgeValue) => {
     console.log(data);
+    // TODO: aller chercher les données
   };
 
   const handleReset = () => {
@@ -67,8 +68,8 @@ export default function FcmPage() {
   };
 
   return (
-    <div className="flex gap-x-2">
-      <Card className="flex-1">
+    <div className="">
+      <Card className="">
         <CardHeader className="flex flex-col">
           <div className="">
             <CardTitle className="text-center">Fréquence Cardiaque</CardTitle>
