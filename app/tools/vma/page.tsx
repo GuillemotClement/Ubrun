@@ -11,12 +11,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getVmaZone, VmaData } from "@/lib/services/vma";
+import { getVmaZone } from "@/lib/services/vma";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import VmaResultRow from "./VmaResultRow";
+import { VmaData } from "@/lib/types/calculator";
 
 const formSchema = z.object({
   vma: z
@@ -50,16 +51,18 @@ export default function VmaPage() {
     setVmaZone(getVmaZone(data.vma));
   };
 
-  const onReset = () => {
-    // setVma(null);
+  const handleReset = () => {
     setVmaZone([]);
+    form.reset();
   };
 
   return (
-    <div className="">
-      <Card>
+    <div className="flex gap-x-2">
+      <Card className="flex-1 flex justify-center">
         <CardHeader>
-          <CardTitle>Vitesse Maximale Aérobie</CardTitle>
+          <CardTitle className="text-center mb-2">
+            Vitesse Maximale Aérobie
+          </CardTitle>
           <CardDescription>
             La VMA correspond à la vitesse de course à partir de laquelle la
             consommation d&apos;oxygène atteint son maximum (VO2max). Elle
@@ -69,7 +72,7 @@ export default function VmaPage() {
             capacités cardiovasculaires et optimiser sa progression.
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="">
           <Form onSubmit={form.handleSubmit(onSubmit)} title="Vma">
             <InputNumberField
               min={0}
@@ -77,18 +80,18 @@ export default function VmaPage() {
               step={0.01}
               name="vma"
               form={form}
-              label="Vma"
+              label=""
               placeholder="VMA"
               isRequired={true}
             />
-            <FormAction submitText="Calculer" onReset={onReset} />
+            <FormAction submitText="Calculer" handleReset={handleReset} />
           </Form>
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="flex-2">
         <CardHeader>
-          <CardTitle>Zone VMA</CardTitle>
+          <CardTitle className="text-center">Zone VMA</CardTitle>
         </CardHeader>
         <CardContent>
           {vmaZone.length > 0 ? (
@@ -112,7 +115,9 @@ export default function VmaPage() {
               </div>
             </>
           ) : (
-            "Saisir une VMA pour obtenir les zone"
+            <p className="text-center mt-10">
+              Saisir une VMA pour obtenir les zones
+            </p>
           )}
         </CardContent>
       </Card>

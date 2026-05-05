@@ -1,4 +1,4 @@
-import { VmaData } from "@/lib/services/vma";
+import { VmaData } from "@/lib/types/calculator";
 
 type VmaResultRowProp = {
   zone: VmaData;

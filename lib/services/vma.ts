@@ -1,12 +1,7 @@
+import { VmaData } from "../types/calculator";
+import { convertSpeedToAllure, getPurcentValue } from "./calculator";
+
 // ici qu'on place la logique
-export type VmaData = {
-  title: string;
-  name: string;
-  minPurcent: number;
-  maxPurcent: number;
-  minValue: string;
-  maxValue: string;
-};
 
 export const getVmaZone = (vma: number): VmaData[][] => {
   const raceVma: VmaData[] = [
@@ -101,26 +96,4 @@ export const getVmaZone = (vma: number): VmaData[][] => {
 const getPurcentValueVma = (vma: number, purcent: number) => {
   const purcentVma = getPurcentValue(vma, purcent, false);
   return convertSpeedToAllure(purcentVma);
-};
-
-const convertSpeedToAllure = (speed: number): string => {
-  const allure = 60 / speed;
-  const minute = Math.floor(allure);
-  const seconde = Math.round((allure - minute) * 60);
-  const validSecond = seconde.toString().padStart(2, "0");
-  return minute + "'" + validSecond;
-};
-
-const getPurcentValue = (
-  total: number,
-  purcent: number,
-  arrondis: boolean = true,
-): number => {
-  let value = (total * purcent) / 100;
-
-  if (arrondis) {
-    value = Math.round(value);
-  }
-
-  return value;
 };

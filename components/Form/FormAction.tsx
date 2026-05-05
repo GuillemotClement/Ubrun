@@ -2,13 +2,16 @@ import { Button } from "../ui/button";
 
 type FormActionProp = {
   submitText: string;
-  onReset: () => void;
+  handleReset: () => void;
 };
 
-export default function FormAction({ submitText, onReset }: FormActionProp) {
+export default function FormAction({
+  submitText,
+  handleReset,
+}: FormActionProp) {
   return (
-    <div className="flex justify-end">
-      <Button type="button" onClick={() => onReset}>
+    <div className="flex justify-end mt-5 gap-x-3">
+      <Button type="button" onClick={handleReset} variant={"outline"}>
         Effacer
       </Button>
       <Button type="submit">{submitText}</Button>
