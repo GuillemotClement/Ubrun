@@ -1,4 +1,5 @@
-import { assertions, routes } from './lighthouse.setting.mjs';
+// import { assertions, routes } from './lighthouse.setting.cjs';
+const { assertions, routes } = require('./lighthouse.setting.cjs');
 
 const config = {
   ci: {
@@ -18,4 +19,5 @@ const config = {
   },
 };
 
-export default config;
+// export default config;
+module.exports = config;

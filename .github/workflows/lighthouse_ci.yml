@@ -35,7 +35,7 @@ jobs:
         run: npm install -g @lhci/cli@0.15.x
 
       - name: Run Lighthouse CI
-        run: lhci autorun --config=./config/lighthouse/lighthouserc.${{ matrix.device}}.mjs
+        run: lhci autorun --config=./config/lighthouse/lighthouserc.${{ matrix.device}}.cjs
         env:
           LHCI_GITHUB_APP_TOKEN: ${{secrets.LHCI_GITHUB_APP_TOKEN}}
 
