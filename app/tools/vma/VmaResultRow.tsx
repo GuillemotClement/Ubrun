@@ -1,4 +1,4 @@
-import { VmaData } from "@/lib/types/calculator";
+import { VmaData } from '@/lib/types/calculator';
 
 type VmaResultRowProp = {
   zone: VmaData;
@@ -7,7 +7,7 @@ type VmaResultRowProp = {
 export default function VmaResultRow({ zone }: VmaResultRowProp) {
   const { title, name, minValue, maxValue, minPurcent, maxPurcent } = zone;
 
-  const style = "border h-10 w-10 rounded flex justify-center items-center";
+  const style = 'border h-10 w-10 rounded flex justify-center items-center';
 
   return (
     <div className="border flex justify-between p-3 my-3 rounded">

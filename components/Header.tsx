@@ -1,6 +1,7 @@
-import Link from "next/link";
-import NavLink from "./NavLink";
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
+
+import NavLink from './NavLink';
 
 export default function Header() {
   return (
