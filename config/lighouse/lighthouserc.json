@@ -1,7 +1,11 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://localhost:3000"],
+      "url": [
+        "http://localhost:3000",
+        "http://localhost:3000/tools/fcm",
+        "http://localhost:3000/tools/vma"
+      ],
       "startServerCommand": "npm run start",
       "startServerReadyPattern": "Ready|ready|started server|Local:",
       "numberOfRuns": 1
