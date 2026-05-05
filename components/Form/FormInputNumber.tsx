@@ -1,6 +1,7 @@
-import { Controller, FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { Field, FieldError, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+import { Controller, FieldValues, Path, UseFormReturn } from 'react-hook-form';
+
+import { Field, FieldError, FieldLabel } from '../ui/field';
+import { Input } from '../ui/input';
 
 // <T> : permet de passer un typage générique
 // Path => issue de react hook form
@@ -42,9 +43,9 @@ export default function FormInputNumber<T extends FieldValues>({
             placeholder={placeholder}
             onChange={(e) => {
               const value = e.target.value;
-              field.onChange(value === "" ? undefined : parseFloat(value));
+              field.onChange(value === '' ? undefined : parseFloat(value));
             }}
-            value={field.value ?? ""}
+            value={field.value ?? ''}
             step={step}
             required={isRequired}
             type="number"

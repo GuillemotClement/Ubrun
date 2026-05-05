@@ -1,25 +1,28 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import Header from "@/components/partials/Header";
-import Footer from "@/components/partials/Footer";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono, Inter } from 'next/font/google';
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+import { cn } from '@/lib/utils';
+
+import Footer from '@/components/partials/Footer';
+import Header from '@/components/partials/Header';
+
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Ubrun",
-  description: "Votre partenaire performance",
+  title: 'Ubrun',
+  description: 'Votre partenaire performance',
 };
 
 export default function RootLayout({
@@ -30,15 +33,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
+      className={cn(
+        'h-full',
+        'antialiased',
+        geistSans.variable,
+        geistMono.variable,
+        'font-sans',
+        inter.variable
+      )}
     >
       <body className="min-h-full flex flex-col">
         <Header />
-        <main className="flex-1 mx-auto border w-250">
-          {children}
-        </main>
+        <main className="flex-1 mx-auto border w-250">{children}</main>
         <Footer />
-        </body>
+      </body>
     </html>
   );
 }
