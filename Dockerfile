@@ -70,7 +70,6 @@ RUN if [ -f package-lock.json ]; then \
 # ============================================
 # Stage 3: Run Next.js application
 # ============================================
-
 FROM node:${NODE_VERSION} AS runner
 
 # Set working directory
@@ -84,7 +83,7 @@ ENV HOSTNAME="0.0.0.0"
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the run time.
-# ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Copy production assets
 COPY --from=builder --chown=node:node /app/public ./public
@@ -92,6 +91,15 @@ COPY --from=builder --chown=node:node /app/public ./public
 # Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown node:node .next
+
+# ADD FOR COOLIFY 
+USER root 
+
+RUN api-get update \ 
+  && apt-get install -y --no-install-recommends curl \ 
+  && rm -rf /var/lib/apt/lists/*
+
+USER node
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
