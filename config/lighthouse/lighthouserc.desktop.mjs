@@ -28,8 +28,7 @@
 //   }
 // }
 // config/lighthouse/lighthouserc.desktop.js
-import routes from './lighthouse.setting';
-import { assertions } from './lighthouse.setting';
+import { assertions, routes } from './lighthouse.setting.mjs';
 
 module.exports = {
   ci: {
