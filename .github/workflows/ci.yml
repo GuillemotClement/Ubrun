@@ -27,7 +27,12 @@ jobs:
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@0.15.x
 
-      - name: Run Lighthouse CI
+      - name: Run Lighthouse CI mobile
         run: lhci autorun --config=./lighthouserc.json
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{secrets.LHCI_GITHUB_APP_TOKEN}}
+
+      - name: Run Lighouse CI desktop
+        run: lhci autorun --config=./ligourserc_desktop.json
         env:
           LHCI_GITHUB_APP_TOKEN: ${{secrets.LHCI_GITHUB_APP_TOKEN}}
