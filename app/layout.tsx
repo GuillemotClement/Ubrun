@@ -1,20 +1,23 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import { layoutMetadata } from "@/lib/metadata";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import { Geist, Geist_Mono, Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+import { layoutMetadata } from '@/lib/metadata';
+import { cn } from '@/lib/utils';
+
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata = layoutMetadata;
@@ -28,12 +31,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "h-full",
-        "antialiased",
+        'h-full',
+        'antialiased',
         geistSans.variable,
         geistMono.variable,
-        "font-sans",
-        inter.variable,
+        'font-sans',
+        inter.variable
       )}
     >
       <body className="flex flex-col min-h-screen">

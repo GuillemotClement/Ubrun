@@ -1,13 +1,13 @@
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
 export const layoutMetadata: Metadata = {
   // permet de définir la base de toutes les url => utiliser par open graph
-  metadataBase: new URL("https://ubrun.fr"),
+  metadataBase: new URL('https://ubrun.fr'),
 
   // définis le titre de l'onglet
   title: {
-    default: "Ubrun - Outils et calculateurs pour la course à pied",
-    template: "%s | Ubrun",
+    default: 'Ubrun - Outils et calculateurs pour la course à pied',
+    template: '%s | Ubrun',
   },
 
   // afficher par Google sous le titre et ce que les réseaux prenne => mot clé, donne envie de cliquer, affiche clairement le but de l'app
@@ -16,25 +16,24 @@ export const layoutMetadata: Metadata = {
 
   // mot clé mais pas forcément utiliser par Google
   keywords: [
-    "course à pied",
-    "running",
-    "calculateur running",
-    "calcul allure",
-    "VMA",
+    'course à pied',
+    'running',
+    'calculateur running',
+    'calcul allure',
+    'VMA',
     "zones d'entraînement",
-    "temps de course",
-    "préparation course",
-    "convertisseur allure en vitesse",
-    "prédicteur de temps",
+    'temps de course',
+    'préparation course',
+    'convertisseur allure en vitesse',
+    'prédicteur de temps',
   ],
 
   // utiliser par les réseaux sociaux => preview pour le partage de lien
   openGraph: {
-    title: "Ubrun",
-    description:
-      "Des calculateurs simples pour mieux comprendre ta course à pied.",
-    url: "https://ton-domaine.com",
-    siteName: "Ubrun",
+    title: 'Ubrun',
+    description: 'Des calculateurs simples pour mieux comprendre ta course à pied.',
+    url: 'https://ton-domaine.com',
+    siteName: 'Ubrun',
     // TODO: modifier pour prendre le bon
     // images: [
     //   {
@@ -44,8 +43,8 @@ export const layoutMetadata: Metadata = {
     //     alt: "Ubrun",
     //   },
     // ],
-    locale: "fr_FR",
-    type: "website",
+    locale: 'fr_FR',
+    type: 'website',
   },
 
   // spécifique à twitter
