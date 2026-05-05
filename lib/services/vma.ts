@@ -58,7 +58,7 @@ export const getVmaZone = (vma: number): VmaData[][] => {
     },
     {
       title: "Z3",
-      name: "Seuil",
+      name: "Seuil | Tempo",
       minPurcent: 80,
       maxPurcent: 90,
       minValue: getPurcentValueVma(vma, 80),
@@ -66,7 +66,7 @@ export const getVmaZone = (vma: number): VmaData[][] => {
     },
     {
       title: "Z4",
-      name: "VMA longue",
+      name: "VMA longue - supérieur à 400m",
       minPurcent: 90,
       maxPurcent: 100,
       minValue: getPurcentValueVma(vma, 90),
@@ -74,7 +74,7 @@ export const getVmaZone = (vma: number): VmaData[][] => {
     },
     {
       title: "Z5",
-      name: "VMA Courte",
+      name: "VMA Courte ->100m & <400m",
       minPurcent: 95,
       maxPurcent: 105,
       minValue: getPurcentValueVma(vma, 95),
@@ -82,7 +82,7 @@ export const getVmaZone = (vma: number): VmaData[][] => {
     },
     {
       title: "Z6",
-      name: "Anaérobie",
+      name: "Anaérobie - sprint",
       minPurcent: 105,
       maxPurcent: 150,
       minValue: getPurcentValueVma(vma, 105),

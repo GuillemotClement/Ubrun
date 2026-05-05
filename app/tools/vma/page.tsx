@@ -2,7 +2,6 @@
 
 import Form from "@/components/Form/Form";
 import FormAction from "@/components/Form/FormAction";
-import InputNumberField from "@/components/Form/InputNumber";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import VmaResultRow from "./VmaResultRow";
 import { VmaData } from "@/lib/types/calculator";
+import FormInputNumber from "@/components/Form/FormInputNumber";
 
 const formSchema = z.object({
   vma: z
@@ -74,7 +74,7 @@ export default function VmaPage() {
         </CardHeader>
         <CardContent className="">
           <Form onSubmit={form.handleSubmit(onSubmit)} title="Vma">
-            <InputNumberField
+            <FormInputNumber
               min={0}
               max={40}
               step={0.01}

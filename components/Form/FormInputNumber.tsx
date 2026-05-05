@@ -5,7 +5,7 @@ import { Input } from "../ui/input";
 // <T> : permet de passer un typage générique
 // Path => issue de react hook form
 // extends FieldValues => doit correspondre au type du formulaire valide
-type InputNumberFieldProp<T extends FieldValues> = {
+type FormInputNumberProps<T extends FieldValues> = {
   min: number;
   max: number;
   step: number;
@@ -16,7 +16,7 @@ type InputNumberFieldProp<T extends FieldValues> = {
   isRequired: boolean;
 };
 
-export default function InputNumberField<T extends FieldValues>({
+export default function FormInputNumber<T extends FieldValues>({
   min,
   max,
   step,
@@ -25,7 +25,7 @@ export default function InputNumberField<T extends FieldValues>({
   label,
   placeholder,
   isRequired,
-}: InputNumberFieldProp<T>) {
+}: FormInputNumberProps<T>) {
   return (
     <Controller
       name={name}

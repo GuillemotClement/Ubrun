@@ -1,13 +1,112 @@
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+
+import Form from "@/components/Form/Form";
+import FormAction from "@/components/Form/FormAction";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import FormInputNumber from "@/components/Form/FormInputNumber";
+import FormInputRadio from "@/components/Form/FormInputRadio";
+
+// Définition des schéma de validation des formulaire
+const formAgeSchema = z.object({
+  age: z
+    .number()
+    .min(1, "Une âge valide est attendu")
+    .max(120, "Un âge valide est attendu")
+    .positive("Un âge valide est attendu"),
+  gender: z.enum(["man", "woman"], {
+    error: "Sélectionner un genre",
+  }),
+});
+
+// Définition des types du composants
+type FormAgeValue = z.infer<typeof formAgeSchema>;
+type TypeForm = "age" | "value";
+
+// option pour les checkboxs
+const genderType = [
+  {
+    id: "man",
+    title: "Homme",
+  },
+  {
+    id: "woman",
+    title: "Femme",
+  },
+];
 
 export default function FcmPage() {
+  const ageForm = useForm<FormAgeValue>({
+    resolver: zodResolver(formAgeSchema),
+    defaultValues: {
+      age: undefined,
+      gender: undefined,
+    },
+  });
+
+  const onSubmitAge = (data: FormAgeValue) => {
+    console.log(data);
+  };
+
+  const handleReset = () => {
+    ageForm.reset({
+      age: undefined,
+      gender: undefined,
+    });
+  };
+
   return (
     <div className="flex gap-x-2">
-      <Card className="flex-1 flex justify-center">
-        <CardHeader>
-          <CardTitle>Fréquence Cardiaque</CardTitle>
+      <Card className="flex-1">
+        <CardHeader className="flex flex-col">
+          <div className="">
+            <CardTitle className="text-center">Fréquence Cardiaque</CardTitle>
+            <CardDescription className="text-justify my-2">
+              Obtiens tes zones d’entraînement cardiaque à partir de ta
+              fréquence cardiaque maximale théorique ou de tes valeurs
+              physiologiques mesurées.
+            </CardDescription>
+          </div>
+          <CardAction className="flex justify-center w-full gap-x-3">
+            <Button>Par âge</Button>
+            <Button>Par valeur</Button>
+          </CardAction>
         </CardHeader>
+        <CardContent>
+          <Form onSubmit={ageForm.handleSubmit(onSubmitAge)} title="">
+            <FormInputNumber
+              min={1}
+              max={140}
+              name="age"
+              form={ageForm}
+              label="Age :"
+              placeholder=""
+              isRequired={true}
+              step={0}
+            />
+            <FormInputRadio
+              form={ageForm}
+              name="gender"
+              types={genderType}
+              label="Genre :"
+            />
+            <FormAction submitText="Calculer" handleReset={handleReset} />
+          </Form>
+        </CardContent>
       </Card>
+
+      <Card className="flex-2"></Card>
     </div>
   );
 }
