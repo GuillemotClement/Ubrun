@@ -173,7 +173,7 @@ export default function FcmPage() {
             <CardTitle className="text-center">Zone de fréquence cardiaque</CardTitle>
             <CardDescription className="text-center">
               Renseignes ton âge où tes valeurs physiologique dans le formulaire pour obtenir tes
-              zones cardiaques d'entrainement
+              zones cardiaques d&apos;entrainement
             </CardDescription>
           </>
         ) : (
