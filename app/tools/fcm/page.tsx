@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { getFcmWithAge, getZoneWithAge, getZoneWithValue } from '@/lib/services/fcm';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -19,6 +20,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+
+import FcmZoneRow from './FcmZoneRow';
 
 // Définition des schéma de validation des formulaire
 const formAgeSchema = z.object({
@@ -64,6 +67,8 @@ const genderType = [
 
 export default function FcmPage() {
   const [typeForm, setTypeForm] = useState<TypeForm>('age');
+  const [fcZone, setFcZone] = useState([]);
+  // const [fcm, setFcm] = useState();
 
   const ageForm = useForm<FormAgeValue>({
     resolver: zodResolver(formAgeSchema),
@@ -82,12 +87,13 @@ export default function FcmPage() {
   });
 
   const onSubmitAge = (data: FormAgeValue) => {
-    console.log(data);
+    setFcZone(getZoneWithAge(data));
+    // setFcm(getFcmWithAge(data.age, data.gender));
     // TODO: aller chercher les données
   };
 
   const onSubmitValue = (data: FormValue) => {
-    console.log(data);
+    setFcZone(getZoneWithValue(data));
   };
 
   const handleReset = () => {
@@ -95,6 +101,8 @@ export default function FcmPage() {
       age: undefined,
       gender: undefined,
     });
+    setFcZone([]);
+    // setFcm(0);
 
     valueForm.reset({
       fcMax: undefined,
@@ -103,8 +111,8 @@ export default function FcmPage() {
   };
 
   return (
-    <div className="">
-      <Card className="">
+    <>
+      <Card className="mb-5">
         <CardHeader className="flex flex-col">
           <div className="w-full">
             <CardTitle className="text-center">Fréquence Cardiaque</CardTitle>
@@ -120,7 +128,7 @@ export default function FcmPage() {
         </CardHeader>
         <CardContent>
           {typeForm === 'age' ? (
-            <Form onSubmit={ageForm.handleSubmit(onSubmitAge)}>
+            <Form onSubmit={ageForm.handleSubmit(onSubmitAge)} key="age-form">
               <FormInputNumber
                 min={1}
                 max={140}
@@ -129,32 +137,32 @@ export default function FcmPage() {
                 label="Age :"
                 placeholder=""
                 isRequired={true}
-                step={0}
+                step={1}
               />
               <FormInputRadio form={ageForm} name="gender" types={genderType} label="Genre :" />
               <FormAction submitText="Calculer" handleReset={handleReset} />
             </Form>
           ) : (
-            <Form onSubmit={valueForm.handleSubmit(onSubmitValue)}>
+            <Form onSubmit={valueForm.handleSubmit(onSubmitValue)} key="value-form">
               <FormInputNumber
                 min={100}
                 max={250}
                 name="fcMax"
                 form={valueForm}
-                label="FcMax :"
+                label="Fréquence Cardique Maximale :"
                 placeholder=""
                 isRequired={true}
-                step={0}
+                step={1}
               />
               <FormInputNumber
                 min={10}
                 max={210}
                 name="fcRepos"
                 form={valueForm}
-                label="Fc Repos :"
+                label="Fréquence Cardiaque au Repos :"
                 placeholder=""
                 isRequired={true}
-                step={0}
+                step={1}
               />
               <FormAction submitText="Calculer" handleReset={handleReset} />
             </Form>
@@ -162,7 +170,26 @@ export default function FcmPage() {
         </CardContent>
       </Card>
 
-      <Card className="flex-2"></Card>
-    </div>
+      <Card className="flex-2">
+        {fcZone.length < 1 ? (
+          <>
+            <CardTitle className="text-center">Zone de fréquence cardiaque</CardTitle>
+            <CardDescription className="text-center">
+              Renseignes ton âge où tes valeurs physiologique dans le formulaire pour obtenir tes
+              zones cardiaques d'entrainement
+            </CardDescription>
+          </>
+        ) : (
+          <>
+            <CardTitle className="text-center font-bold">Zone de fréquence cardiaque</CardTitle>
+            <CardContent>
+              {fcZone.map((zone) => {
+                return <FcmZoneRow key={zone.title} zone={zone} />;
+              })}
+            </CardContent>
+          </>
+        )}
+      </Card>
+    </>
   );
 }
