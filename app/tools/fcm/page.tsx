@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { getFcmWithAge, getZoneWithAge, getZoneWithValue } from '@/lib/services/fcm';
+import { ZoneData, getZoneWithAge, getZoneWithValue } from '@/lib/services/fcm';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -67,7 +67,7 @@ const genderType = [
 
 export default function FcmPage() {
   const [typeForm, setTypeForm] = useState<TypeForm>('age');
-  const [fcZone, setFcZone] = useState([]);
+  const [fcZone, setFcZone] = useState<ZoneData[]>([]);
   // const [fcm, setFcm] = useState();
 
   const ageForm = useForm<FormAgeValue>({
@@ -88,8 +88,6 @@ export default function FcmPage() {
 
   const onSubmitAge = (data: FormAgeValue) => {
     setFcZone(getZoneWithAge(data));
-    // setFcm(getFcmWithAge(data.age, data.gender));
-    // TODO: aller chercher les données
   };
 
   const onSubmitValue = (data: FormValue) => {
@@ -102,7 +100,6 @@ export default function FcmPage() {
       gender: undefined,
     });
     setFcZone([]);
-    // setFcm(0);
 
     valueForm.reset({
       fcMax: undefined,

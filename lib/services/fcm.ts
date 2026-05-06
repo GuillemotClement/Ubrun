@@ -29,7 +29,7 @@ export const getFcmWithAge = (age: number, gender: Gender): number => {
   return 0;
 };
 
-export const getZoneWithAge = (valueUser) => {
+export const getZoneWithAge = (valueUser: ValueUser): ZoneData[] => {
   const { age, gender } = valueUser;
   const fcMax = getFcmWithAge(age, gender);
 
