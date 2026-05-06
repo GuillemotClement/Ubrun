@@ -13,7 +13,8 @@ export default function Header() {
         <div className="flex gap-x-2">
           <NavLink href="/">Accueil</NavLink>
           <NavLink href="/tools/vma">VMA</NavLink>
-          {/* <NavLink href="/tools/fcm">FCM</NavLink> */}
+          <NavLink href="/tools/fcm">FCM</NavLink>
+          <NavLink href="/tools/convertor">Convertisseur</NavLink>
         </div>
       </div>
     </header>
