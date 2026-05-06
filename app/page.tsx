@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <>
       <div className="">
-        <h1 className="text-center font-bold text-3xl">En cours de développement</h1>
+        {/* <h1 className="text-center font-bold text-3xl">En cours de développement</h1> */}
         {/* <h2>Cours plus juste, progresse plus vite</h2>
         <p>
           FCM, VMA, allures, prédictions de chrono - tous les calculs dont tu as
@@ -32,13 +32,13 @@ export default function Home() {
       </div>
 
       <div className="mx-auto my-5">
-        <h3 className="text-2xl font-bold">Les outils</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 px-5">
+        <h3 className="text-2xl font-bold text-center mb-5">Les outils</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 px-5">
           {tools.map((tool) => (
             <Card key={tool.id} className="px-3">
               <CardTitle className="text-center">{tool.title}</CardTitle>
-              <CardDescription>{tool.description}</CardDescription>
-              <CardAction>
+              <CardDescription className="text-center">{tool.description}</CardDescription>
+              <CardAction className="flex justify-center w-full">
                 <Link href={tool.url}>
                   <Button>Accéder</Button>
                 </Link>
