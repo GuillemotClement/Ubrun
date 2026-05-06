@@ -32,7 +32,7 @@ export default function FormInputNumber<T extends FieldValues>({
       name={name}
       control={form.control}
       render={({ field, fieldState }) => (
-        <Field data-invalid={fieldState.invalid}>
+        <Field data-invalid={fieldState.invalid} className="my-4">
           <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
           <Input
             {...field}

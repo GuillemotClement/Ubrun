@@ -67,15 +67,15 @@ export default function VmaPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="">
-          <Form onSubmit={form.handleSubmit(onSubmit)} title="Vma">
+          <Form onSubmit={form.handleSubmit(onSubmit)}>
             <FormInputNumber
               min={0}
               max={40}
               step={0.01}
               name="vma"
               form={form}
-              label=""
-              placeholder="VMA"
+              label="VMA :"
+              placeholder=""
               isRequired={true}
             />
             <FormAction submitText="Calculer" handleReset={handleReset} />
