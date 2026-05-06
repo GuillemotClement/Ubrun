@@ -19,3 +19,17 @@ export const getPurcentValue = (
 
   return value;
 };
+
+export const convertAllureToSpeed = (
+  minute: number | null,
+  second: number | null
+): number | null => {
+  if (!minute || !second) {
+    return null;
+  }
+
+  const minPerKm = minute + second / 60;
+  const kmh = 60 / minPerKm;
+
+  return Number(kmh.toFixed(2));
+};
