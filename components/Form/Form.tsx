@@ -4,8 +4,6 @@ type FormProp = {
 };
 
 export default function Form({ children, onSubmit }: FormProp) {
-  const title = 'super test';
-
   return (
     <form onSubmit={onSubmit} className="">
       {children}
