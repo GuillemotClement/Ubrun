@@ -1,5 +1,10 @@
 'use client';
 
+import { useState } from 'react';
+
+import { useRouter } from 'next/navigation';
+
+import { authClient } from '@/lib/betterAuth/auth-client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -18,6 +23,11 @@ const registerFormSchema = z.object({
 type RegisterFormValue = z.infer<typeof registerFormSchema>;
 
 export default function RegisterPage() {
+  const router = useRouter();
+
+  const [serverError, setServerError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const registerForm = useForm<RegisterFormValue>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -27,13 +37,37 @@ export default function RegisterPage() {
     },
   });
 
-  const onSubmitRegister = (data: RegisterFormValue) => {
-    // appelle fonction
-    console.log(data);
+  const onSubmitRegister = async (data: RegisterFormValue) => {
+    setServerError('');
+    setIsLoading(true);
+
+    const { email, password, name } = data;
+
+    await authClient.signUp.email(
+      {
+        email,
+        password,
+        name,
+        callbackURL: '/',
+      },
+      {
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onSuccess: () => {
+          router.push('/');
+        },
+        onError: (ctx) => {
+          setServerError(ctx.error.message);
+        },
+      }
+    );
   };
 
   const handleReset = () => {
     registerForm.reset();
+    setIsLoading(false);
+    setServerError('');
   };
 
   return (
@@ -51,7 +85,10 @@ export default function RegisterPage() {
             label="Mot de passe :"
             type="password"
           />
-          <FormAction submitText="Inscription" handleReset={handleReset} />
+
+          {serverError && <p className="text-red-500 italic">{serverError}</p>}
+
+          <FormAction submitText="Inscription" handleReset={handleReset} isLoading={isLoading} />
         </Form>
       </CardContent>
     </Card>
