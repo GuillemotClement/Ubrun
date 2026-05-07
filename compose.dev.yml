@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-ubrun}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Initialize database with SQL script
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - '5432:5432'
+    healthcheck:
+      # Check if Postgres is ready to accept connections
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d ubrun']
+      start_period: 15s
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

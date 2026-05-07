@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Inter } from 'next/font/google';
+import Script from 'next/script';
 
 import { layoutMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
@@ -43,6 +44,11 @@ export default function RootLayout({
         <Header />
         <main className="flex-1 container mx-auto py-10">{children}</main>
         <Footer />
+        <Script
+          src="https://stats.ubrun.fr/script.js"
+          data-website-id="593be361-33d4-4ac2-b85a-558bf6d8a004"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
