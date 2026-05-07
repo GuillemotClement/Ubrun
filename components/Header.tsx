@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import NavLink from './NavLink';
+import { Button } from './ui/button';
 
 export default function Header() {
   return (
@@ -16,6 +17,14 @@ export default function Header() {
           <NavLink href="/tools/fcm">FCM</NavLink>
           <NavLink href="/tools/convertor">Convertisseur</NavLink>
         </div>
+      </div>
+      <div className="">
+        <Link href="/auth/register">
+          <Button>Inscription</Button>
+        </Link>
+        <Link href="/auth/login">
+          <Button>Connexion</Button>
+        </Link>
       </div>
     </header>
   );
