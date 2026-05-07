@@ -1,10 +1,29 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+import { authClient } from '@/lib/betterAuth/auth-client';
 
 import NavLink from './NavLink';
 import { Button } from './ui/button';
 
 export default function Header() {
+  const { data: session } = authClient.useSession();
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push('/');
+        },
+      },
+    });
+  };
+
   return (
     <header className="shadow flex justify-between px-10 py-4">
       <div className="flex items-center">
@@ -18,14 +37,21 @@ export default function Header() {
           <NavLink href="/tools/convertor">Convertisseur</NavLink>
         </div>
       </div>
-      <div className="">
-        <Link href="/auth/register">
-          <Button>Inscription</Button>
-        </Link>
-        <Link href="/auth/login">
-          <Button>Connexion</Button>
-        </Link>
-      </div>
+      {!session ? (
+        <div className="">
+          <Link href="/auth/register">
+            <Button>Inscription</Button>
+          </Link>
+          <Link href="/auth/login">
+            <Button>Connexion</Button>
+          </Link>
+        </div>
+      ) : (
+        <div className="">
+          <NavLink href="/profil">{session.user.name}</NavLink>
+          <Button onClick={handleLogout}>Logout</Button>
+        </div>
+      )}
     </header>
   );
 }
