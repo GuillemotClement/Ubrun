@@ -12,7 +12,8 @@
     "prepare": "husky",
     "generate": "npx drizzle-kit generate",
     "migrate": "npx drizzle-kit migrate",
-    "studio": "npx drizzle-kit studio"
+    "studio": "npx drizzle-kit studio",
+    "db:seed": "tsx ./lib/drizzle/db/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
