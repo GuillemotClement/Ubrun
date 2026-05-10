@@ -1,0 +1,2 @@
+ALTER TABLE "message" ADD COLUMN "message_status_id" integer NOT NULL;--> statement-breakpoint
+ALTER TABLE "message" ADD CONSTRAINT "message_message_status_id_message_status_id_fk" FOREIGN KEY ("message_status_id") REFERENCES "public"."message_status"("id") ON DELETE cascade ON UPDATE no action;
