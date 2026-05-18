@@ -10,7 +10,10 @@ import NavLink from './NavLink';
 import { Button } from './ui/button';
 
 export default function Header() {
-  const { data: session } = authClient.useSession();
+  const { data } = authClient.useSession();
+  const isAdmin = data?.session.isAdmin;
+
+  console.log(data);
 
   const router = useRouter();
 
@@ -35,9 +38,10 @@ export default function Header() {
           <NavLink href="/tools/vma">VMA</NavLink>
           <NavLink href="/tools/fcm">FCM</NavLink>
           <NavLink href="/tools/convertor">Convertisseur</NavLink>
+          {isAdmin && <NavLink href="/admin">Administration</NavLink>}
         </div>
       </div>
-      {!session ? (
+      {!data ? (
         <div className="">
           <Link href="/auth/register">
             <Button>Inscription</Button>
@@ -48,7 +52,7 @@ export default function Header() {
         </div>
       ) : (
         <div className="">
-          <NavLink href="/profil">{session.user.name}</NavLink>
+          <NavLink href="/profil">{data.user.name}</NavLink>
           <Button onClick={handleLogout}>Logout</Button>
         </div>
       )}

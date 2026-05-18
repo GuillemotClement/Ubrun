@@ -29,6 +29,8 @@ export const session = pgTable(
     userId: text('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
+    // à ajouter lorsque l'on viens étendre la session better auth
+    isAdmin: boolean('is_admin').default(false).notNull(),
   },
   (table) => [index('session_userId_idx').on(table.userId)]
 );
