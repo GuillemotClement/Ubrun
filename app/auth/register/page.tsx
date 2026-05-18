@@ -41,27 +41,31 @@ export default function RegisterPage() {
     setServerError('');
     setIsLoading(true);
 
-    const { email, password, name } = data;
+    try {
+      const { email, password, name } = data;
 
-    await authClient.signUp.email(
-      {
-        email,
-        password,
-        name,
-        callbackURL: '/',
-      },
-      {
-        onRequest: () => {
-          setIsLoading(true);
+      await authClient.signUp.email(
+        {
+          email,
+          password,
+          name,
+          callbackURL: '/',
         },
-        onSuccess: () => {
-          router.push('/');
-        },
-        onError: (ctx) => {
-          setServerError(ctx.error.message);
-        },
-      }
-    );
+        {
+          onRequest: () => {
+            setIsLoading(true);
+          },
+          onSuccess: () => {
+            router.push('/');
+          },
+          onError: (ctx) => {
+            setServerError(ctx.error.message);
+          },
+        }
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleReset = () => {
