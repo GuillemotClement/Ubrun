@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 
 import { db } from '../drizzle';
 import { messageStatusTable, messageTable, messageTypeTable } from '../drizzle/db/schema/schema';
@@ -9,6 +9,18 @@ type CreateRequestMessageRequest = {
   title: string;
   content: string;
   type: 'feature' | 'bug';
+};
+
+export type RequestMessage = {
+  messageId: number;
+  messageEmail: string;
+  messageTitle: string | null;
+  messageContent: string | null;
+  messageDate: Date;
+  messageStatusId: number;
+  messageStatus: string;
+  messageTypeId: number;
+  messageType: string;
 };
 
 export async function insertRequestMessage(input: CreateRequestMessageRequest) {
@@ -55,4 +67,24 @@ async function getMessageStatusId(title: string): Promise<number | null> {
     .limit(1);
 
   return result[0]?.id ?? null;
+}
+
+export async function getRequestMessages(): Promise<RequestMessage[]> {
+  return db
+    .select({
+      messageId: messageTable.id,
+      messageEmail: messageTable.email,
+      messageTitle: messageTable.title,
+      messageContent: messageTable.content,
+      messageDate: messageTable.createdAt,
+      messageStatusId: messageStatusTable.id,
+      messageStatus: messageStatusTable.title,
+      messageTypeId: messageTypeTable.id,
+      messageType: messageTypeTable.title,
+    })
+    .from(messageTable)
+    .innerJoin(messageTypeTable, eq(messageTable.messageTypeId, messageTypeTable.id))
+    .innerJoin(messageStatusTable, eq(messageTable.messageStatusId, messageStatusTable.id))
+    .orderBy(desc(messageTable.createdAt))
+    .limit(20);
 }

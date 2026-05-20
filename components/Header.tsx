@@ -13,8 +13,6 @@ export default function Header() {
   const { data } = authClient.useSession();
   const isAdmin = data?.session.isAdmin;
 
-  console.log(data);
-
   const router = useRouter();
 
   const handleLogout = async () => {
