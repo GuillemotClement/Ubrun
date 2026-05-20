@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 
+import { authClient } from '@/lib/betterAuth/auth-client';
+import { FormContact, formContactSchema } from '@/lib/validations/contact.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import Form from '@/components/Form/Form';
 import FormAction from '@/components/Form/FormAction';
@@ -13,16 +14,7 @@ import FormInputText from '@/components/Form/FormInputText';
 import FormInputTextArea from '@/components/Form/FormInputTextArea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-const formContactSchema = z.object({
-  email: z.email().trim(),
-  title: z.string().trim().min(3, 'Minimum 3 caractères').max(255, 'Maximum 255 caractères'),
-  content: z.string().trim().min(10, 'Minimum 10 caractères'),
-  type: z.enum(['feature', 'bug'], {
-    error: 'Sélectionner une catégorie',
-  }),
-});
-
-type FormContact = z.infer<typeof formContactSchema>;
+import { createRequestMessage } from './actions';
 
 const contactType = [
   {
@@ -38,24 +30,38 @@ const contactType = [
 export default function ContactPage() {
   const [serverError, setServerError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { data } = authClient.useSession();
+
+  let userEmail = '';
+
+  if (data) {
+    userEmail = data.user.email;
+  }
 
   const contactForm = useForm<FormContact>({
     resolver: zodResolver(formContactSchema),
     defaultValues: {
-      email: '',
+      email: userEmail,
       title: '',
       content: '',
       type: undefined,
     },
   });
 
-  const onSubmitForm = (data: FormContact) => {
-    console.log(data);
-
+  const onSubmitForm = async (data: FormContact) => {
     setServerError('');
     setIsLoading(true);
 
-    // envoie vers la méthode dans service ou actions je sais plus
+    const result = await createRequestMessage(data);
+
+    setIsLoading(false);
+
+    if (!result.success) {
+      setServerError(result.message);
+      return;
+    }
+
+    handleReset();
   };
 
   const handleReset = () => {

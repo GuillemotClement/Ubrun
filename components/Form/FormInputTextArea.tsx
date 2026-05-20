@@ -26,6 +26,7 @@ export default function FormInputTextArea<T extends FieldValues>({
         <Field data-invalid={fieldState.invalid} className="my-4">
           <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
           <Textarea
+            {...field}
             id={field.name}
             placeholder={placeholder}
             required={isRequired}
