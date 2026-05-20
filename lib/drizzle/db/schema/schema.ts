@@ -36,13 +36,13 @@ export const messageStatusTable = pgTable('message_status', {
 
 export const messageTable = pgTable('message', {
   id: serial().primaryKey(),
+  email: varchar().notNull(),
   title: varchar(),
   content: text(),
   messageTypeId: integer('message_type_id')
     .notNull()
     .references(() => messageTypeTable.id, { onDelete: 'cascade' }),
   userId: text('user_id')
-    .notNull()
     .references(() => user.id, { onDelete: 'cascade' }),
   messageStatusId: integer('message_status_id')
     .notNull()

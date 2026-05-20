@@ -14,7 +14,7 @@ export default function Footer() {
         L&apos;application est en version beta et est suceptible d&apos;évoluer rapidement.
       </p>
       <Button>
-        <NavLink href="">Contact</NavLink>
+        <NavLink href="/contact">Contact</NavLink>
       </Button>
     </footer>
   );
